@@ -168,7 +168,7 @@ function download_latest_files() {
         sudo mv $webroot_dir "$webroot_dir.`date +%F-%R`" || install_error "Unable to remove old webroot directory"
     fi
 
-    install_log "Cloning latest files from github"
+    install_log "Cloning latest files from github (AIKEA version)"
     git clone --depth 1 --branch aikea https://github.com/bafu/raspap-webgui /tmp/raspap-webgui || install_error "Unable to download files from github"
     sudo mv /tmp/raspap-webgui $webroot_dir || install_error "Unable to move raspap-webgui to web root"
 }
