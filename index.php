@@ -29,6 +29,7 @@ include_once('includes/functions.php');
 include_once('includes/dashboard.php');
 include_once('includes/authenticate.php');
 include_once('includes/admin.php');
+include_once('includes/telegram.php');
 include_once('includes/dhcp.php');
 include_once('includes/hostapd.php');
 include_once('includes/system.php');
@@ -111,7 +112,7 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
           <div class="sidebar-brand-icon">
             <img src="app/img/raspAP-logo64px.png" width="32" height="32">
           </div>
-	  <div class="sidebar-brand-text ml-1">RaspAP</div>
+	  <div class="sidebar-brand-text ml-1">AIKEA</div>
 	</a>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -153,6 +154,11 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
 	<a class="nav-link" href="index.php?page=auth_conf"><i class="fas fa-user-lock fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure Auth"); ?></a>
 	</li>
 	  <?php endif; ?>
+          <?php if (RASPI_TELEGRAM_ENABLED) : ?>
+        <li class="nav-item">
+    	  <a class="nav-link" href="index.php?page=telegram_conf"><i class="fab fa-telegram fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure Telegram"); ?></a>
+        </li>
+          <?php endif; ?>
 	  <?php if (RASPI_CHANGETHEME_ENABLED) : ?>
 	<li class="nav-item">
 	  <a class="nav-link" href="index.php?page=theme_conf"><i class="fas fa-paint-brush fa-fw mr-2"></i><span class="nav-label"><?php echo _("Change Theme"); ?></a>
@@ -236,6 +242,9 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
 		break;
 	    case "auth_conf":
 		DisplayAuthConfig($config['admin_user'], $config['admin_pass']);
+		break;
+	    case "telegram_conf":
+		DisplayTelegramConfig($config['admin_user'], $config['admin_pass']);
 		break;
 	    case "save_hostapd_conf":
 		SaveTORAndVPNConfig();

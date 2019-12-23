@@ -21,17 +21,18 @@ define('RASPI_OPENVPN_CLIENT_LOGIN', '/etc/openvpn/client/login.conf');
 define('RASPI_OPENVPN_SERVER_CONFIG', '/etc/openvpn/server/server.conf');
 define('RASPI_TORPROXY_CONFIG', '/etc/tor/torrc');
 define('RASPI_LIGHTTPD_CONFIG', '/etc/lighttpd/lighttpd.conf');
+define('RASPI_TELEGRAM_CONFIG', RASPI_CONFIG.'/telegram.json');
 
 // Optional services, set to true to enable.
 define('RASPI_WIFICLIENT_ENABLED', true);
 define('RASPI_HOTSPOT_ENABLED', true);
-define('RASPI_NETWORK_ENABLED', true);
-define('RASPI_DHCP_ENABLED', true);
+define('RASPI_NETWORK_ENABLED', false);
+define('RASPI_DHCP_ENABLED', false);
 define('RASPI_OPENVPN_ENABLED', false);
 define('RASPI_TORPROXY_ENABLED', false);
 define('RASPI_CONFAUTH_ENABLED', true);
-define('RASPI_CHANGETHEME_ENABLED', true);
-define('RASPI_VNSTAT_ENABLED', true);
+define('RASPI_CHANGETHEME_ENABLED', false);
+define('RASPI_VNSTAT_ENABLED', false);
 define('RASPI_SYSTEM_ENABLED', true);
 define('RASPI_MONITOR_ENABLED', false);
 
