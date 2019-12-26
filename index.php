@@ -30,6 +30,7 @@ include_once('includes/dashboard.php');
 include_once('includes/authenticate.php');
 include_once('includes/admin.php');
 include_once('includes/telegram.php');
+include_once('includes/pipeline.php');
 include_once('includes/dhcp.php');
 include_once('includes/hostapd.php');
 include_once('includes/system.php');
@@ -159,6 +160,11 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
     	  <a class="nav-link" href="index.php?page=telegram_conf"><i class="fab fa-telegram fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure Telegram"); ?></a>
         </li>
           <?php endif; ?>
+          <?php if (RASPI_PIPELINE_ENABLED) : ?>
+        <li class="nav-item">
+          <a class="nav-link" href="index.php?page=pipeline_conf"><i class="fab fa-telegram fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure Pipeline"); ?></a>
+        </li>
+          <?php endif; ?>
 	  <?php if (RASPI_CHANGETHEME_ENABLED) : ?>
 	<li class="nav-item">
 	  <a class="nav-link" href="index.php?page=theme_conf"><i class="fas fa-paint-brush fa-fw mr-2"></i><span class="nav-label"><?php echo _("Change Theme"); ?></a>
@@ -245,6 +251,9 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
 		break;
 	    case "telegram_conf":
 		DisplayTelegramConfig($config['admin_user'], $config['admin_pass']);
+		break;
+	    case "pipeline_conf":
+		DisplayPipelineConfig();
 		break;
 	    case "save_hostapd_conf":
 		SaveTORAndVPNConfig();

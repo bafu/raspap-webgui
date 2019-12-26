@@ -120,6 +120,21 @@ function create_lighttpd_scripts() {
     sudo chmod 750 "$raspap_dir/lighttpd/"*.sh || install_error "Unable to change file permissions"
 }
 
+# Generate AIKEA service control scripts
+function create_aikea_scripts() {
+    install_log "Creating AIKEA control scripts"
+    sudo mkdir $raspap_dir/aikea || install_error "Unable to create directory '$raspap_dir/lighttpd"
+
+    # Move service control shell scripts
+    sudo cp "$webroot_dir/installers/"restartpipeline.sh "$raspap_dir/aikea" || install_error "Unable to move service control scripts"
+    sudo cp "$webroot_dir/installers/"switchconfig.sh "$raspap_dir/aikea" || install_error "Unable to move service control scripts"
+    # Make configport.sh writable by www-data group
+    sudo chown -c root:"$raspap_user" "$raspap_dir/aikea/"restartpipeline.sh || install_error "Unable change owner and/or group"
+    sudo chown -c root:"$raspap_user" "$raspap_dir/aikea/"switchconfig.sh || install_error "Unable change owner and/or group"
+    sudo chmod 750 "$raspap_dir/aikea/"restartpipeline.sh || install_error "Unable to change file permissions"
+    sudo chmod 750 "$raspap_dir/aikea/"switchconfig.sh || install_error "Unable to change file permissions"
+}
+
 # Prompt to install openvpn
 function prompt_install_openvpn() {
     install_log "Setting up OpenVPN support (beta)"
@@ -324,6 +339,8 @@ function patch_system_files() {
         "/etc/raspap/hostapd/servicestart.sh"
         "/etc/raspap/lighttpd/configport.sh"
         "/etc/raspap/openvpn/configauth.sh"
+        "/etc/raspap/aikea/restartpipeline.sh"
+        "/etc/raspap/aikea/switchconfig.sh"
     )
 
     # Check if sudoers needs patching
@@ -437,6 +454,7 @@ function install_raspap() {
     change_file_ownership
     create_hostapd_scripts
     create_lighttpd_scripts
+    create_aikea_scripts
     move_config_file
     default_configuration
     prompt_install_openvpn
