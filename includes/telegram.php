@@ -12,7 +12,8 @@ function DisplayTelegramConfig($username, $password)
         }
 
         if ($auth_file = fopen(RASPI_TELEGRAM_CONFIG, 'w')) {
-            fwrite($auth_file, $_POST['telegramtoken'].PHP_EOL);
+            $content = '{"token": "'.$_POST['telegramtoken'].'"}';
+            fwrite($auth_file, $content);
             fclose($auth_file);
             $status->addMessage('Telegram token updated');
         } else {
