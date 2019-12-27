@@ -162,7 +162,7 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
           <?php endif; ?>
           <?php if (RASPI_PIPELINE_ENABLED) : ?>
         <li class="nav-item">
-          <a class="nav-link" href="index.php?page=pipeline_conf"><i class="fab fa-telegram fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure Pipeline"); ?></a>
+          <a class="nav-link" href="index.php?page=pipeline_conf"><i class="fas fa-ghost fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure Pipeline"); ?></a>
         </li>
           <?php endif; ?>
 	  <?php if (RASPI_CHANGETHEME_ENABLED) : ?>

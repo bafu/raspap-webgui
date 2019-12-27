@@ -42,9 +42,6 @@ function DisplayPipelineConfig()
             $status->addMessage($line, 'info');
         }
     } elseif (isset($_POST['SavePipelineSettings'])) {
-        $status->addMessage('SavePipelineSettings is called', 'info');
-        $status->addMessage($_POST['pipeline'], 'info');
-        //exec('echo '.$_POST['pipeline'].' > /tmp/debug', $return);
         exec('sudo /etc/raspap/aikea/switchconfig.sh '.$_POST['pipeline']);
         exec('sudo /etc/raspap/aikea/restartpipeline.sh');
     }
