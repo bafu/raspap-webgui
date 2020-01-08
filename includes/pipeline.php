@@ -20,7 +20,7 @@ function DisplayPipelineConfig()
     $arrSecurity = array(1 => 'WPA', 2 => 'WPA2', 3 => 'WPA+WPA2', 'none' => _("None"));
     $arrEncType = array('TKIP' => 'TKIP', 'CCMP' => 'CCMP', 'TKIP CCMP' => 'TKIP+CCMP');
     exec("ip -o link show | awk -F': ' '{print $2}'", $interfaces);
-    $arrPipelineConfig = array('low' => 'low', 'medium' => 'medium', 'high' => 'high', 'default' => 'medium');
+    $arrPipelineConfig = parse_ini_file('/etc/raspap/pipeline.ini');
     $sensitivities = array('low', 'medium', 'high');
 
     if (isset($_POST['SaveHostAPDSettings'])) {
@@ -42,6 +42,8 @@ function DisplayPipelineConfig()
             $status->addMessage($line, 'info');
         }
     } elseif (isset($_POST['SavePipelineSettings'])) {
+        $arrPipelineConfig['sensitivity'] = $_POST['pipeline'];
+        $status->addMessage('Attempting to change sensitivity to '.$arrPipelineConfig['sensitivity'], 'info');
         exec('sudo /etc/raspap/aikea/switchconfig.sh '.$_POST['pipeline']);
         exec('sudo /etc/raspap/aikea/restartpipeline.sh');
     }

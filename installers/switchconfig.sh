@@ -5,3 +5,6 @@ config_source=/etc/dyda/pipelines/configs/aikea/object_detection_and_tracking_ai
 config_target=/etc/dyda/pipelines/configs/object_detection_and_tracking_aikea.config
 unlink $config_target
 ln -s $config_source $config_target
+
+# update pipeline sensitivity config
+echo "sensitivity = $sensitivity" > /etc/raspap/pipeline.ini

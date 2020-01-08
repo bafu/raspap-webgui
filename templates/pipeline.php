@@ -17,7 +17,7 @@
               <div class="form-group col-md-6">
                 <label for="cbxpipeline"><?php echo _("Sensitivity") ;?></label>
                 <?php
-                  SelectorOptions('pipeline', $sensitivities, $arrPipelineConfig['default'], 'cbxpipeline');
+                  SelectorOptions('pipeline', $sensitivities, $arrPipelineConfig['sensitivity'], 'cbxpipeline');
                 ?>
               </div>
             </div>
