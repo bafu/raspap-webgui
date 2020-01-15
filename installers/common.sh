@@ -128,11 +128,14 @@ function create_aikea_scripts() {
     # Move service control shell scripts
     sudo cp "$webroot_dir/installers/"restartpipeline.sh "$raspap_dir/aikea" || install_error "Unable to move service control scripts"
     sudo cp "$webroot_dir/installers/"switchconfig.sh "$raspap_dir/aikea" || install_error "Unable to move service control scripts"
+    sudo cp "$webroot_dir/installers/"restarttelegram.sh "$raspap_dir/aikea" || install_error "Unable to move service control scripts"
     # Make configport.sh writable by www-data group
     sudo chown -c root:"$raspap_user" "$raspap_dir/aikea/"restartpipeline.sh || install_error "Unable change owner and/or group"
     sudo chown -c root:"$raspap_user" "$raspap_dir/aikea/"switchconfig.sh || install_error "Unable change owner and/or group"
+    sudo chown -c root:"$raspap_user" "$raspap_dir/aikea/"restarttelegram.sh || install_error "Unable change owner and/or group"
     sudo chmod 750 "$raspap_dir/aikea/"restartpipeline.sh || install_error "Unable to change file permissions"
     sudo chmod 750 "$raspap_dir/aikea/"switchconfig.sh || install_error "Unable to change file permissions"
+    sudo chmod 750 "$raspap_dir/aikea/"restarttelegram.sh || install_error "Unable to change file permissions"
 }
 
 # Prompt to install openvpn
@@ -341,6 +344,7 @@ function patch_system_files() {
         "/etc/raspap/openvpn/configauth.sh"
         "/etc/raspap/aikea/restartpipeline.sh"
         "/etc/raspap/aikea/switchconfig.sh"
+        "/etc/raspap/aikea/restarttelegram.sh"
     )
 
     # Check if sudoers needs patching

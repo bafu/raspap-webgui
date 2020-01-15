@@ -15,6 +15,7 @@ function DisplayTelegramConfig($username, $password)
             $content = '{"token": "'.$_POST['telegramtoken'].'"}';
             fwrite($auth_file, $content);
             fclose($auth_file);
+            exec('sudo /etc/raspap/aikea/restarttelegram.sh');
             $status->addMessage('Telegram token updated');
         } else {
             $status->addMessage('Failed to update Telegram token', 'danger');
