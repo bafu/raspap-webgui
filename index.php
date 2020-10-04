@@ -41,6 +41,7 @@ include_once('includes/data_usage.php');
 include_once('includes/about.php');
 include_once('includes/openvpn.php');
 include_once('includes/torproxy.php');
+include_once('includes/ai_apps.php');
 
 $output = $return = 0;
 $page = $_GET['page'];
@@ -111,9 +112,8 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php?page=wlan0_info">
           <div class="sidebar-brand-icon">
-            <img src="app/img/raspAP-logo64px.png" width="32" height="32">
+            <img src="app/img/aikea/aikea-logo.png" height="32">
           </div>
-	  <div class="sidebar-brand-text ml-1">AIKEA</div>
 	</a>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -122,12 +122,12 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
 	</li>
 	<?php if (RASPI_WIFICLIENT_ENABLED) : ?>
 	<li class="nav-item">
-	  <a class="nav-link" href="index.php?page=wpa_conf"><i class="fas fa-wifi fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure WiFi client"); ?></span></a>
+          <a class="nav-link" href="index.php?page=wpa_conf"><i class="fas fa-wifi fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure WiFi client"); ?></span></a>
 	</li>
 	  <?php endif; ?>
 	  <?php if (RASPI_HOTSPOT_ENABLED) : ?>
 	<li class="nav-item">
-	  <a class="nav-link" href="index.php?page=hostapd_conf"><i class="far fa-dot-circle fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure hotspot"); ?></a>
+          <a class="nav-link" href="index.php?page=hostapd_conf"><i class="far fa-dot-circle fa-fw mr-2"></i><span class="nav-label"><?php echo _("Configure hotspot"); ?></a>
 	</li>
 	  <?php endif; ?>
 	  <?php if (RASPI_NETWORK_ENABLED) : ?>
@@ -180,6 +180,11 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
 	  <a class="nav-link" href="index.php?page=system_info"><i class="fas fa-cube fa-fw mr-2"></i><span class="nav-label"><?php echo _("System"); ?></a>
     </li>
       <?php endif; ?>
+          <?php if (RASPI_AIAPPS_ENABLED) : ?>
+        <li class="nav-item">
+          <a class="nav-link" href="index.php?page=ai_apps"><i class="fas fa-brain fa-fw mr-2"></i><span class="nav-label"><?php echo _("AI Apps"); ?></a>
+        </li>
+          <?php endif; ?>
 	 <li class="nav-item">
 	  <a class="nav-link" href="index.php?page=about"><i class="fas fa-info-circle fa-fw mr-2"></i><span class="nav-label"><?php echo _("About RaspAP"); ?></a>
 	</li>
@@ -266,6 +271,9 @@ if ($_COOKIE['sidebarToggled'] == 'true' ) {
 		break;
 	    case "system_info":
 		DisplaySystem();
+		break;
+	    case "ai_apps":
+		DisplayAIApps();
 		break;
 	    case "about":
 		DisplayAbout();
